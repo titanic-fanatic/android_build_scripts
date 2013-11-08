@@ -7,13 +7,13 @@ SCRIPTVERSION='1.0'
 
 echo " "
 echo " "
-echo "***************************************************"
+echo -e "${lcyan}***************************************************${NC}"
 echo "                                                   "
-echo "               CM-11.0 BUILD SCRIPT                "
-echo "                    Version $SCRIPTVERSION         "
-echo "                for the SGH-I757M                  "
+echo -e "               ${lcyan}CM-11.0 BUILD SCRIPT${NC}                "
+echo -e "                    ${lcyan}Version $SCRIPTVERSION${NC}         "
+echo -e "                ${lcyan}for the SGH-I757M${NC}                  "
 echo "                                                   "
-echo "***************************************************"
+echo -e "${lcyan}***************************************************${NC}"
 echo " "
 echo " "
 
