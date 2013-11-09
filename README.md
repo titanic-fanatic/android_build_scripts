@@ -4,7 +4,7 @@ CM-11.0 Build Script for the SGH-I757M
 This build script has been put together to make the build process easier. just run the following from the root of your build directory and it will start the build process without clobbering, syncing repositories or syncing pre-builts:
 
 ```````````````````
-$ . start_build.sh
+$ ./start_build.sh
 ```````````````````
   
 That should get you started.
