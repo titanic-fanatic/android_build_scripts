@@ -18,5 +18,3 @@ If you need to clobber, sync repos and/or sync pre-builts, use the following com
     -s    Sync repositories before build
     -p    Sync pre-builts before build
 ```````````````````
-
-In future versions of this build script you may be able to define the clobber options at the command line as a set of arguments to the start_build.sh script.
