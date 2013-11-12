@@ -148,6 +148,11 @@ echo -e "${lcyan}Build errors being recorded to: ${NC}logs/CM110BuildError-$DATE
 echo " "
 echo " "
 
+if [ ! -d "./logs" ];
+then
+    mkdir -p ./logs 2> /dev/null
+fi
+
 make bacon -j24 2> logs/CM110BuildErrors-$DATE_NOW.log
 
 BUILDSTATUS=$?
