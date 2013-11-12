@@ -43,6 +43,10 @@ then
             CLOBBER='Y'
             PREBUILTS='Y'
         ;;
+        '-sp' | '-ps')
+            SYNC='Y'
+            PREBUILTS='Y'
+        ;;
         '-csp' | '-cps' | '-scp' | '-spc' | '-pcs' | '-psc')
             CLOBBER='Y'
             SYNC='Y'
