@@ -11,7 +11,7 @@ function banner(){
     echo " "
     echo -e "${lcyan}***************************************************${NC}"
     echo "                                                   "
-    echo -e "               ${lcyan}CM-10.2 BUILD SCRIPT${NC}                "
+    echo -e "              ${lcyan}Slim-JB4.3 BUILD SCRIPT${NC}              "
     echo -e "                    ${lcyan}Version $SCRIPTVERSION${NC}         "
     echo -e "                ${lcyan}for the SGH-I757M${NC}                  "
     echo "                                                   "
@@ -96,7 +96,7 @@ echo " "
 echo " "
 
 . build/envsetup.sh
-lunch cm_celoxhd-eng
+lunch slim_celoxhd-eng
 
 if [ $CLOBBER == "Y" ];
 then
@@ -153,7 +153,7 @@ then
     mkdir -p ./logs 2> /dev/null
 fi
 
-make bacon -j24 2> logs/CM102BuildErrors-$DATE_NOW.log
+make bacon -j24 2> logs/SlimJB4.3BuildErrors-$DATE_NOW.log
 
 BUILDSTATUS=$?
 finish_time=$(date +%s)
