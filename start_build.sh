@@ -20,67 +20,107 @@ function banner(){
 
 ### END FUNCTIONS ###
 
+### INITIALIZE VARIABLES ###
+
 CLOBBER='N'
 SYNC='N'
 PREBUILTS='N'
-if [ $# -eq 1 ];
+THREADS=$(grep 'processor' /proc/cpuinfo | wc -l)
+
+### END INITIALIZE VARIABLES ###
+
+if [ $# -eq 1 ] || [ $# -eq 2 ];
 then
-    case $1 in
-        '-c')
-            CLOBBER='Y'
-        ;;
-        '-s')
-            SYNC='Y'
-        ;;
-        '-p')
-            PREBUILTS='Y'
-        ;;
-        '-cs' | '-sc')
-            CLOBBER='Y'
-            SYNC='Y'
-        ;;
-        '-cp' | '-pc')
-            CLOBBER='Y'
-            PREBUILTS='Y'
-        ;;
-        '-sp' | '-ps')
-            SYNC='Y'
-            PREBUILTS='Y'
-        ;;
-        '-csp' | '-cps' | '-scp' | '-spc' | '-pcs' | '-psc')
-            CLOBBER='Y'
-            SYNC='Y'
-            PREBUILTS='Y'
-        ;;
-        '-h' | '--help')
-            banner
-            echo -e "${lcyan}                       USAGE                       ${NC}"
-            echo -e "${lcyan}***************************************************${NC}"
-            echo " "
-            echo "./start_build.sh [OPTION(s)]"
-            echo " "
-            echo "OPTIONS"
-            echo "    -c     Clobber the out directory before building"
-            echo "    -s     Sync repos before building"
-            echo "    -p     Sync pre-builts before building"
-            echo " "
-            echo -e "${lcyan}***************************************************${NC}"
-            echo " "
-            echo " "
-            
-            exit 0
-        ;;
-        *)
-            echo " "
-            echo " "
-            echo "Invalid parameter: $1"
-            echo " "
-            echo " "
-            
-            exit 1
-        ;;
-    esac
-elif [ $# -gt 0 ];
+    if ! [ ${1//[0-9]/} == "-j" ];
+    then
+        OPTIONSARG=$1
+    elif [ $# -eq 2 ] && ! [ ${2//[0-9]/} == "-j" ];
+    then
+        OPTIONSARG=$2
+    else
+        OPTIONSARG='null'
+    fi
+    
+    if ! [ $OPTIONSARG == "null" ];
+    then
+        case $OPTIONSARG in
+            '-c')
+                CLOBBER='Y'
+            ;;
+            '-s')
+                SYNC='Y'
+            ;;
+            '-p')
+                PREBUILTS='Y'
+            ;;
+            '-cs' | '-sc')
+                CLOBBER='Y'
+                SYNC='Y'
+            ;;
+            '-cp' | '-pc')
+                CLOBBER='Y'
+                PREBUILTS='Y'
+            ;;
+            '-sp' | '-ps')
+                SYNC='Y'
+                PREBUILTS='Y'
+            ;;
+            '-csp' | '-cps' | '-scp' | '-spc' | '-pcs' | '-psc')
+                CLOBBER='Y'
+                SYNC='Y'
+                PREBUILTS='Y'
+            ;;
+            '-h' | '--help')
+                banner
+                echo -e "                       USAGE                       "
+                echo -e "${lcyan}***************************************************${NC}"
+                echo " "
+                echo "./start_build.sh [OPTION(s)]"
+                echo " "
+                echo "OPTIONS"
+                echo "    -c     Clobber the out directory before building"
+                echo "    -s     Sync repos before building"
+                echo "    -p     Sync pre-builts before building"
+                echo " "
+                echo "    -j     Number of threads to use for build"
+                echo "           MUST BE FOLLOWED BY A NUMBER REPRESENTING"
+                echo "           THE NUMBER OF CORES YOUR SYSTEM HAS."
+                echo "           IF YOU OMIT THIS OPTION, THE SCRIPT WILL"
+                echo "           DETECT THE NUMBER OF CORES AUTOMATICALLY."
+                echo " "
+                echo "           THIS OPTION MUST BE ENTERED AS IT'S OWN"
+                echo "           ARGUMENT SEPARATE FROM THE OTHER ARGUMENTS."
+                echo " "
+                echo "           Example: ./start_build.sh -j4"
+                echo "                    ./start_build.sh -j4 -csp"
+                echo "                    ./start_build.sh -csp -j4"
+                echo " "
+                echo -e "${lcyan}***************************************************${NC}"
+                echo " "
+                echo " "
+                
+                exit 0
+            ;;
+            *)
+                echo " "
+                echo " "
+                echo "Invalid parameter: $1"
+                echo " "
+                echo " "
+                
+                exit 1
+            ;;
+        esac
+    fi
+    
+    if [ ${1//[0-9]/} == "-j" ];
+    then
+        THREADS=${1//-j/}
+    elif [ $# -eq 2 ] && [ ${2//[0-9]/} == "-j" ];
+    then
+        THREADS=${2//-j/}
+    fi
+elif [ $# -gt 2 ];
 then
     echo " "
     echo " "
@@ -144,7 +184,8 @@ start_time=$(date +%s)
 
 echo -e "${lcyan}Starting build...${NC}"
 echo -e "${lcyan}Build started at${NC} $DATE_START"
-echo -e "${lcyan}Build errors being recorded to: ${NC}logs/CM110BuildError-$DATE_NOW.log"
+echo -e "${lcyan}Build using${NC} $THREADS ${lcyan}threads${NC}"
+echo -e "${lcyan}Build errors being recorded to: ${NC}logs/CM102BuildError-$DATE_NOW.log"
 echo " "
 echo " "
 
@@ -153,7 +194,7 @@ then
     mkdir -p ./logs 2> /dev/null
 fi
 
-make bacon -j24 2> logs/CM102BuildErrors-$DATE_NOW.log
+make bacon -j$THREADS 2> logs/CM102BuildErrors-$DATE_NOW.log
 
 BUILDSTATUS=$?
 finish_time=$(date +%s)
