@@ -136,7 +136,7 @@ echo " "
 echo " "
 
 . build/envsetup.sh
-lunch cm_celoxhd-eng
+lunch pa_celoxhd-eng
 
 if [ $CLOBBER == "Y" ];
 then
