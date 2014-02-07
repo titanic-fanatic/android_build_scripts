@@ -11,7 +11,7 @@ function banner(){
     echo " "
     echo -e "${lcyan}***************************************************${NC}"
     echo "                                                   "
-    echo -e "               ${lcyan}PA-JB4.3 BUILD SCRIPT${NC}               "
+    echo -e "               ${lcyan}PA-kitkat BUILD SCRIPT${NC}               "
     echo -e "                    ${lcyan}Version $SCRIPTVERSION${NC}         "
     echo -e "                ${lcyan}for the SGH-I757M${NC}                  "
     echo "                                                   "
@@ -185,7 +185,7 @@ start_time=$(date +%s)
 echo -e "${lcyan}Starting build...${NC}"
 echo -e "${lcyan}Build started at${NC} $DATE_START"
 echo -e "${lcyan}Build using${NC} $THREADS ${lcyan}threads${NC}"
-echo -e "${lcyan}Build errors being recorded to: ${NC}logs/PAJB4.3BuildError-$DATE_NOW.log"
+echo -e "${lcyan}Build errors being recorded to: ${NC}logs/PAkitkatBuildError-$DATE_NOW.log"
 echo " "
 echo " "
 
@@ -194,7 +194,7 @@ then
     mkdir -p ./logs 2> /dev/null
 fi
 
-make bacon -j$THREADS 2> logs/PAJB4.3BuildErrors-$DATE_NOW.log
+make bacon -j$THREADS 2> logs/PAkitkatBuildErrors-$DATE_NOW.log
 
 BUILDSTATUS=$?
 finish_time=$(date +%s)
