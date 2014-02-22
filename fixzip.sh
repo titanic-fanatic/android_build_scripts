@@ -15,7 +15,7 @@ lred='\e[1;31m'
 NC='\e[0m'
 
 WF=$(pwd -L)
-MT="$WF/buildtools/META-INF"
+MT="$WF/buildtools/recovery/META-INF"
 OF="$WF/out/target/product/celoxhd"
 TF="$OF/tmp"
 ZIP=''
