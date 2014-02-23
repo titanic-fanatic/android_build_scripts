@@ -207,10 +207,12 @@ then
     echo " "
     echo " "
     echo -e "${lred}BUILD FAILED!${NC}"
+    echo " "
+    echo " "
+else
+    ./fixzip.sh
 fi
 
-echo " "
-echo " "
 echo -e "${lcyan}Build started at${NC} $DATE_START"
 echo -e "${lcyan}Build finished at${NC} $DATE_END"
 echo -e "${lcyan}and took${NC} $hours ${lcyan}hours ${NC} $minutes ${lcyan}minutes and${NC} $seconds seconds."
