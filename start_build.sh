@@ -9,13 +9,13 @@ SCRIPTVERSION='1.0'
 function banner(){
     echo " "
     echo " "
-    echo -e "${lcyan}***************************************************${NC}"
-    echo "                                                   "
-    echo -e "               ${lcyan}CM-11.0 BUILD SCRIPT${NC}                "
-    echo -e "                    ${lcyan}Version $SCRIPTVERSION${NC}         "
-    echo -e "                ${lcyan}for the SGH-I757M${NC}                  "
-    echo "                                                   "
-    echo -e "${lcyan}***************************************************${NC}"
+    echo -e "${lcyan}*****************************************************${NC}"
+    echo "                                                     "
+    echo -e "               ${lcyan}CARBON-KK BUILD SCRIPT${NC}                "
+    echo -e "                     ${lcyan}Version $SCRIPTVERSION${NC}          "
+    echo -e "                 ${lcyan}for the SGH-I757M${NC}                   "
+    echo "                                                     "
+    echo -e "${lcyan}*****************************************************${NC}"
 }
 
 ### END FUNCTIONS ###
@@ -136,7 +136,7 @@ echo " "
 echo " "
 
 . build/envsetup.sh
-lunch cm_celoxhd-eng
+lunch carbon_celoxhd-userdebug
 
 if [ $CLOBBER == "Y" ];
 then
@@ -185,7 +185,7 @@ start_time=$(date +%s)
 echo -e "${lcyan}Starting build...${NC}"
 echo -e "${lcyan}Build started at${NC} $DATE_START"
 echo -e "${lcyan}Build using${NC} $THREADS ${lcyan}threads${NC}"
-echo -e "${lcyan}Build errors being recorded to: ${NC}logs/CM110BuildError-$DATE_NOW.log"
+echo -e "${lcyan}Build errors being recorded to: ${NC}logs/CarbonKKBuildError-$DATE_NOW.log"
 echo " "
 echo " "
 
@@ -194,7 +194,7 @@ then
     mkdir -p ./logs 2> /dev/null
 fi
 
-make bacon -j$THREADS 2> logs/CM110BuildErrors-$DATE_NOW.log
+make carbon -j$THREADS 2> logs/CarbonKKBuildErrors-$DATE_NOW.log
 
 BUILDSTATUS=$?
 finish_time=$(date +%s)
@@ -212,7 +212,7 @@ then
     echo " "
     echo " "
 else
-    ./fixzip.sh
+    #./fixzip.sh
 fi
 
 echo -e "${lcyan}Build started at${NC} $DATE_START"
