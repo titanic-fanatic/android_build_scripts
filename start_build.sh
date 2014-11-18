@@ -11,7 +11,7 @@ function banner(){
     echo " "
     echo -e "${lcyan}***************************************************${NC}"
     echo "                                                   "
-    echo -e "               ${lcyan}CM-11.0 BUILD SCRIPT${NC}                "
+    echo -e "               ${lcyan}CM-12.0 BUILD SCRIPT${NC}                "
     echo -e "                    ${lcyan}Version $SCRIPTVERSION${NC}         "
     echo -e "                ${lcyan}for the SGH-I757M${NC}                  "
     echo "                                                   "
@@ -194,7 +194,7 @@ then
     mkdir -p ./logs 2> /dev/null
 fi
 
-make bacon -j$THREADS 2> logs/CM110BuildErrors-$DATE_NOW.log
+mka bacon -j$THREADS 2> logs/CM120BuildErrors-$DATE_NOW.log
 
 BUILDSTATUS=$?
 finish_time=$(date +%s)
