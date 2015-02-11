@@ -26,6 +26,11 @@ CLOBBER='N'
 SYNC='N'
 PREBUILTS='N'
 THREADS=$(grep 'processor' /proc/cpuinfo | wc -l)
+PHILZDIR='/home/titanic-fanatic/PhilZ'
+PHILZZIP='philz_touch_6.26.4-celoxhd.zip'
+OUTDIR='out/target/product/celoxhd'
+PROPFILE='default.prop'
+SCRIPTFILE='mk_tar_md5.sh'
 
 ### END INITIALIZE VARIABLES ###
 
@@ -210,6 +215,9 @@ then
     echo " "
     echo -e "${lred}BUILD FAILED!${NC}"
 fi
+
+cp $PHILZDIR/$PHILZZIP $OUTDIR/$PHILZZIP
+cp $PHILZDIR/$SCRIPTFILE $OUTDIR/philz.sh
 
 echo " "
 echo " "
