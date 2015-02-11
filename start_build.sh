@@ -136,7 +136,7 @@ echo " "
 echo " "
 
 . build/envsetup.sh
-lunch carbon_celoxhd-userdebug
+lunch carbon_celoxhd-eng
 
 if [ $CLOBBER == "Y" ];
 then
@@ -211,8 +211,8 @@ then
     echo -e "${lred}BUILD FAILED!${NC}"
     echo " "
     echo " "
-#else
-#    ./fixzip.sh
+else
+    ./fixzip.sh
 fi
 
 echo -e "${lcyan}Build started at${NC} $DATE_START"
