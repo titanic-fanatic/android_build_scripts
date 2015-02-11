@@ -32,7 +32,7 @@ for file in $OF/*;
 do
     fileName=$(basename "$file");
     
-    if [[ "$fileName" =~ ^cm-10\.2.* ]] && [[ "$fileName" =~ .*celoxhd\.zip$ ]];
+    if [[ "$fileName" =~ ^CARBON-KK-UNOFFICIAL.* ]] && [[ "$fileName" =~ .*celoxhd\.zip$ ]];
     then
         ZIP="$file"
     fi
